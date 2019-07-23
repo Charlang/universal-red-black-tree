@@ -1,0 +1,24 @@
+{
+    "extends": ["tslint:latest", "tslint-eslint-rules"],
+    "rules": {
+      // Disable explicit visibility declarations for class members
+      "member-access": false,
+      // Disable that import statements be alphabetized and grouped.
+      "ordered-imports": false,
+      // Disable ordering of keys in object literals
+      "object-literal-sort-keys": false,
+      // Only single quote
+      "quotemark": [true, "single" ],
+      // enforces a maximum line length to 120 since we all have big screen, ignore svg path
+      "max-line-length": [true, { "limit": 120, "ignore-pattern": "([A-Z,])?([0-9])+([.| ])?"} ],
+      // This can be project level setup
+      "no-submodule-imports": [true, ""],
+      // By adding the "dev" option the rule also looks at "devDependencies", apply to testing / build code
+      "no-implicit-dependencies": [true, "dev"],
+      // Only allow log and error level
+      "no-console": [true, "log", "error"]
+    },
+    "linterOptions": {
+      "exclude": ["**/*.json"]
+    }
+  }

@@ -1,0 +1,21 @@
+{
+  "name": "universal-red-black-tree",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "prepublish": "tsc",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "test": "node ./dist/index.js"
+  },
+  "author": "Charlie.Lang",
+  "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-google": "^0.13.0",
+    "tslint": "^5.18.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "^3.5.3"
+  }
+}
