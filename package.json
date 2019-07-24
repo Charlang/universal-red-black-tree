@@ -14,7 +14,7 @@
   "homepage": "https://github.com/Charlang/universal-red-black-tree.git",
   "scripts": {
     "build": "tsc",
-    "prepublish": "tsc",
+    "prepare": "tsc",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "test": "node ./dist/index.js"
   },
