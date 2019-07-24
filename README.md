@@ -2,6 +2,18 @@
 
 Universal js which implement red black tree
 
+## Interface
+
+  Could be found in the type defines, with apis: ```insert / insertKey / search / deleteNode / minimum / maximum```.
+
+## Highlight
+
+  Use typescript
+
+  No external dependency
+
+  Tiny
+
 ## Benchmark testing
 
   System config:
@@ -19,15 +31,3 @@ Universal js which implement red black tree
   Memory Usage: {"rss":6575562752,"heapTotal":6548602880,"heapUsed":6403859088,"external":8272}
   ✨  Done in 30.77s.
 ```
-
-### Interface
-
-  Could be found in the type defines, with apis: ```insert / insertKey / search / deleteNode / minimum / maximum```.
-
-### Highlight
-
-  Use typescript
-
-  No external dependency
-
-  Tiny
