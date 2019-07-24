@@ -4,6 +4,14 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Charlang/universal-red-black-tree.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Charlang/universal-red-black-tree/issues"
+  },
+  "homepage": "https://github.com/Charlang/universal-red-black-tree.git",
   "scripts": {
     "build": "tsc",
     "prepublish": "tsc",
