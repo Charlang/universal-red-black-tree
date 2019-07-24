@@ -54,7 +54,7 @@ export const search = (tree: ITree, key: any) => {
   return x;
 };
 
-import { insert } from './insert';
+import { insert, insertKey } from './insert';
 import { deleteNode } from './delete';
 
-export { insert, deleteNode };
+export { deleteNode, insert, insertKey };

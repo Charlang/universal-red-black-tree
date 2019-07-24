@@ -1,6 +1,17 @@
 import { INode, ITree, NIL } from './';
 import { leftRotate, rightRotate } from './rotate';
 
+export const insertKey = (tree: ITree, key: any) => {
+  const z: INode = {
+    key,
+    parent: NIL,
+    color: 'RED',
+    left: NIL,
+    right: NIL,
+  };
+  insert(tree, z);
+};
+
 export const insert = (tree: ITree, z: INode) => {
   let y = NIL;
   let x = tree.root;

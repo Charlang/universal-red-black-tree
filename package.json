@@ -16,7 +16,7 @@
     "build": "tsc",
     "prepare": "tsc",
     "lint": "tslint -c tslint.json -p tsconfig.json",
-    "test": "node ./dist/index.js"
+    "bench-test": "node --max-old-space-size=8192 ./dist/benchmark/index.js"
   },
   "author": "Charlie.Lang",
   "devDependencies": {
