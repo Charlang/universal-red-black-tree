@@ -2,6 +2,10 @@
 
 Universal js which implement red black tree
 
+## Up and Run
+
+```yarn add universal-red-black-tree```
+
 ## Interface
 
   Could be found in the type defines, with apis: ```insert / insertKey / search / deleteNode / minimum / maximum```.
