@@ -1,9 +1,9 @@
 export interface INode {
-  key: any;
-  color: 'RED' | 'BLACK';
-  parent: INode;
-  left: INode;
-  right: INode;
+  key: any; // key
+  c: 0 | 1; // '0-RED' | '1-BLACK';
+  p: INode; // parent node
+  l: INode; // left child
+  r: INode; // right child
 }
 
 export interface ITree {
@@ -12,49 +12,49 @@ export interface ITree {
 
 export const NIL: INode = {
   key: null,
-  color: 'BLACK',
+  c: 1,
   // @ts-ignore
-  parent: null,
+  p: null,
   // @ts-ignore
-  left: null,
+  l: null,
   // @ts-ignore
-  right: null,
+  r: null,
 };
 
 export const minimum = (tree: INode) => {
-  let x: any = tree;
+  let x = tree;
   let depth = 0;
-  while (x !== NIL && x.left !== NIL) {
+  while (x !== NIL && x.l !== NIL) {
     depth ++;
-    x = x.left;
+    x = x.l;
   }
-  console.info('minimum depth:' + depth);
+  console.info('find minimum with depth:' + depth);
   return x;
 };
 
 export const maximum = (tree: INode) => {
-  let x: any = tree;
+  let x = tree;
   let depth = 0;
-  while (x !== NIL && x.right !== NIL) {
+  while (x !== NIL && x.r !== NIL) {
     depth ++;
-    x = x.right;
+    x = x.r;
   }
-  console.info('maximum depth:' + depth);
+  console.info('find maximum with depth:' + depth);
   return x;
 };
 
 export const search = (tree: ITree, key: any) => {
-  let x: any = tree.root;
+  let x = tree.root;
   let depth = 0;
   while (x !== NIL && x.key !== key) {
-    x = x.key > key ? x.left : x.right;
+    x = x.key > key ? x.l : x.r;
     depth++;
   }
-  console.info('search depth:' + depth);
+  console.info('search find node at depth:' + depth);
   return x;
 };
 
 import { insert, insertKey } from './insert';
 import { deleteNode } from './delete';
 
-export { deleteNode, insert, insertKey };
+export { insert, insertKey, deleteNode };

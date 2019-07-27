@@ -1,13 +1,13 @@
 import { INode, ITree, NIL } from './';
-import { leftRotate, rightRotate } from './rotate';
+import { lRotate, rRotate } from './rotate';
 
 export const insertKey = (tree: ITree, key: any) => {
   const z: INode = {
     key,
-    parent: NIL,
-    color: 'RED',
-    left: NIL,
-    right: NIL,
+    p: NIL,
+    c: 0,
+    l: NIL,
+    r: NIL,
   };
   insert(tree, z);
 };
@@ -18,54 +18,54 @@ export const insert = (tree: ITree, z: INode) => {
   while (x !== NIL) {
     y = x;
     // TODO: Implement compare function
-    x = (z.key < x.key) ? x.left : x.right;
+    x = (z.key < x.key) ? x.l : x.r;
   }
-  z.parent = y;
+  z.p = y;
   if (y === NIL) {
     tree.root = z;
   } else if (z.key < y.key) {
-    y.left = z;
+    y.l = z;
   } else {
-    y.right = z;
+    y.r = z;
   }
-  z.left = z.right = NIL;
-  z.color = 'RED';
+  z.l = z.r = NIL;
+  z.c = 0;
   insertFixUp(tree, z);
 };
 
 const insertFixUp = (tree: ITree, z: INode) => {
-  while (z.parent.color === 'RED') {
-    if (z.parent === z.parent.parent.left) {
-      const y = z.parent.parent.right;
-      if (y.color === 'RED') {
-        z.parent.color = y.color = 'BLACK';
-        z.parent.parent.color = 'RED';
-        z = z.parent.parent;
+  while (z.p.c === 0) {
+    if (z.p === z.p.p.l) {
+      const y = z.p.p.r;
+      if (y.c === 0) {
+        z.p.c = y.c = 1;
+        z.p.p.c = 0;
+        z = z.p.p;
       } else {
-        if (z === z.parent.right) {
-          z = z.parent;
-          leftRotate(tree, z);
+        if (z === z.p.r) {
+          z = z.p;
+          lRotate(tree, z);
         }
-        z.parent.color = 'BLACK';
-        z.parent.parent.color = 'RED';
-        rightRotate(tree, z.parent.parent);
+        z.p.c = 1;
+        z.p.p.c = 0;
+        rRotate(tree, z.p.p);
       }
-    } else if (z.parent === z.parent.parent.right) {
-      const y = z.parent.parent.left;
-      if (y.color === 'RED') {
-        z.parent.color = y.color = 'BLACK';
-        z.parent.parent.color = 'RED';
-        z = z.parent.parent;
+    } else if (z.p === z.p.p.r) {
+      const y = z.p.p.l;
+      if (y.c === 0) {
+        z.p.c = y.c = 1;
+        z.p.p.c = 0;
+        z = z.p.p;
       } else {
-        if (z === z.parent.left) {
-          z = z.parent;
-          rightRotate(tree, z);
+        if (z === z.p.l) {
+          z = z.p;
+          rRotate(tree, z);
         }
-        z.parent.color = 'BLACK';
-        z.parent.parent.color = 'RED';
-        leftRotate(tree, z.parent.parent);
+        z.p.c = 1;
+        z.p.p.c = 0;
+        lRotate(tree, z.p.p);
       }
     }
   }
-  tree.root.color = 'BLACK';
+  tree.root.c = 1;
 };

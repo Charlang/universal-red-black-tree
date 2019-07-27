@@ -1,53 +1,53 @@
 import { INode, ITree, NIL } from './';
 
-export const leftRotate = (tree: ITree, x: INode) => {
+export const lRotate = (tree: ITree, x: INode) => {
   if (x === NIL) {
     console.info('Nothing happen if try to left rotate a NIL node');
     return;
   }
-  if (x.right === NIL) {
+  if (x.r === NIL) {
     console.info('Nothing happen if try to left rotate a node whose right child is NIL');
     return;
   }
-  const y = x.right;
-  x.right = y.left;
-  if (y.left !== NIL) {
-    y.left.parent = x;
+  const y = x.r;
+  x.r = y.l;
+  if (y.l !== NIL) {
+    y.l.p = x;
   }
-  y.parent = x.parent;
-  if (x.parent === NIL) {
+  y.p = x.p;
+  if (x.p === NIL) {
     tree.root = y;
-  } else if (x === x.parent.left) {
-    x.parent.left = y;
+  } else if (x === x.p.l) {
+    x.p.l = y;
   } else {
-    x.parent.right = y;
+    x.p.r = y;
   }
-  y.left = x;
-  x.parent = y;
+  y.l = x;
+  x.p = y;
 };
 
-export const rightRotate = (tree: ITree, y: INode) => {
+export const rRotate = (tree: ITree, y: INode) => {
   if (y === NIL) {
-    console.info('Nothing happen if try to left rotate a NIL node');
+    console.info('Nothing happen if try to right rotate a NIL node');
     return;
   }
-  if (y.left === NIL) {
-    console.info('Nothing happen if try to left rotate a node whose left child is NIL');
+  if (y.l === NIL) {
+    console.info('Nothing happen if try to right rotate a node whose left child is NIL');
     return;
   }
-  const x = y.left;
-  y.left = x.right;
-  if (x.right !== NIL) {
-    x.right.parent = y;
+  const x = y.l;
+  y.l = x.r;
+  if (x.r !== NIL) {
+    x.r.p = y;
   }
-  x.parent = y.parent;
-  if (y.parent === NIL) {
+  x.p = y.p;
+  if (y.p === NIL) {
     tree.root = x;
-  } else if (y === y.parent.left) {
-    y.parent.left = x;
+  } else if (y === y.p.l) {
+    y.p.l = x;
   } else {
-    y.parent.right = x;
+    y.p.r = x;
   }
-  x.right = y;
-  y.parent = x;
+  x.r = y;
+  y.p = x;
 };

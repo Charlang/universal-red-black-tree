@@ -1,105 +1,105 @@
 import { INode, ITree, NIL, minimum } from './';
-import { leftRotate, rightRotate } from './rotate';
+import { lRotate, rRotate } from './rotate';
 
 const transplant = (tree: ITree, u: INode, v: INode) => {
-  if (u.parent === NIL) {
+  if (u.p === NIL) {
     tree.root = v;
-  } else if (u === u.parent.left) {
-    u.parent.left = v;
+  } else if (u === u.p.l) {
+    u.p.l = v;
   } else {
-    u.parent.right = v;
+    u.p.r = v;
   }
-  v.parent = u.parent;
+  v.p = u.p;
 };
 export const deleteNode = (tree: ITree, z: INode) => {
   if (z === NIL || tree.root === NIL) {
     return;
   }
   let y = z;
-  let yOriginalColor = y.color;
+  let yOriginalColor = y.c;
   let x;
-  if (z.left === NIL) {
-    x = z.right;
-    transplant(tree, z, z.right);
-  } else if (z.right === NIL) {
-    x = z.left;
-    transplant(tree, z, z.left);
+  if (z.l === NIL) {
+    x = z.r;
+    transplant(tree, z, z.r);
+  } else if (z.r === NIL) {
+    x = z.l;
+    transplant(tree, z, z.l);
   } else {
-    y = minimum(z.right);
-    yOriginalColor = y.color;
-    x = y.right;
-    if (y.parent === z) {
-      x.parent = y;
+    y = minimum(z.r);
+    yOriginalColor = y.c;
+    x = y.r;
+    if (y.p === z) {
+      x.p = y;
     } else {
-      transplant(tree, y, y.right);
-      y.right = z.right;
-      y.right.parent = y;
+      transplant(tree, y, y.r);
+      y.r = z.r;
+      y.r.p = y;
     }
     transplant(tree, z, y);
-    y.left = z.left;
-    y.left.parent = y;
-    y.color = z.color;
+    y.l = z.l;
+    y.l.p = y;
+    y.c = z.c;
   }
-  if (yOriginalColor === 'BLACK') {
+  if (yOriginalColor === 1) {
     deleteFixUp(tree, x);
   }
 };
 
 const deleteFixUp = (tree: ITree, x: INode) => {
-  while (x !== tree.root && x.color === 'BLACK') {
-    if (x === x.parent.left) {
-      let w = x.parent.right;
+  while (x !== tree.root && x.c === 1) {
+    if (x === x.p.l) {
+      let w = x.p.r;
       // Case 1
-      if (w.color === 'RED') {
-        w.color = 'BLACK';
-        x.parent.color = 'RED';
-        leftRotate(tree, x.parent);
-        w = w.parent.right;
+      if (w.c === 0) {
+        w.c = 1;
+        x.p.c = 0;
+        lRotate(tree, x.p);
+        w = w.p.r;
       }
       // Case 2
-      if (w.left.color === 'BLACK' && w.right.color === 'BLACK') {
-        w.color = 'RED';
-        x = x.parent;
+      if (w.l.c === 1 && w.r.c === 1) {
+        w.c = 0;
+        x = x.p;
       } else {
         // Case 3
-        if (w.right.color === 'BLACK') {
-          w.left.color = 'BLACK';
-          w.color = 'RED';
-          rightRotate(tree, w);
-          w = x.parent.right;
+        if (w.r.c === 1) {
+          w.l.c = 1;
+          w.c = 0;
+          rRotate(tree, w);
+          w = x.p.r;
         }
         // Case 4
-        w.color = x.parent.color;
-        x.parent.color = 'BLACK';
-        w.right.color = 'BLACK';
-        leftRotate(tree, x.parent);
+        w.c = x.p.c;
+        x.p.c = 1;
+        w.r.c = 1;
+        lRotate(tree, x.p);
         x = tree.root;
       }
     } else {
-      let w = x.parent.left;
-      if (w.color === 'RED') {
-        w.color = 'BLACK';
-        x.parent.color = 'RED';
-        rightRotate(tree, x.parent);
-        w = w.parent.left;
+      let w = x.p.l;
+      if (w.c === 0) {
+        w.c = 1;
+        x.p.c = 0;
+        rRotate(tree, x.p);
+        w = w.p.l;
       }
-      if (w.left.color === 'BLACK' && w.right.color === 'BLACK') {
-        w.color = 'RED';
-        x = x.parent;
+      if (w.l.c === 1 && w.r.c === 1) {
+        w.c = 0;
+        x = x.p;
       } else {
-        if (w.left.color === 'BLACK') {
-          w.right.color = 'BLACK';
-          w.color = 'RED';
-          leftRotate(tree, w);
-          w = x.parent.left;
+        if (w.l.c === 1) {
+          w.r.c = 1;
+          w.c = 0;
+          lRotate(tree, w);
+          w = x.p.l;
         }
-        w.color = x.parent.color;
-        x.parent.color = 'BLACK';
-        w.left.color = 'BLACK';
-        rightRotate(tree, x.parent);
+        w.c = x.p.c;
+        x.p.c = 1;
+        w.l.c = 1;
+        rRotate(tree, x.p);
         x = tree.root;
       }
     }
   }
-  x.color = 'BLACK';
+  x.c = 1;
 };
